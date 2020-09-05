@@ -12,7 +12,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Actions = () => {
+const Actions = (props) => {
   const classes = useStyles();
 
   return (
@@ -20,7 +20,7 @@ const Actions = () => {
       <MenuList>
         <MenuItem>
           <ListItemIcon>
-            <FormModal icon={<AddIcon />} text="Add your Caponord" primary />
+            <FormModal icon={<AddIcon />} text="Add your Caponord" primary firebase={props.firebase} />
           </ListItemIcon>
         </MenuItem>
         <MenuItem>
