@@ -2,14 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import { IconButton, Hidden, MenuList, MenuItem, ListItemIcon, Paper, Typography } from '@material-ui/core';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
+import FormModal from '../../FormModal/FormModal'
+import AddIcon from '@material-ui/icons/Add';
 import SearchIcon from '@material-ui/icons/Search';
 import HelpIcon from '@material-ui/icons/Help';
 
 const useStyles = makeStyles({
   root: {
-    right: 0,
-    float: 'right'
   },
 });
 
@@ -21,26 +20,20 @@ const Actions = () => {
       <MenuList>
         <MenuItem>
           <ListItemIcon>
-            <AddCircleIcon fontSize="large" />
+            <FormModal icon={<AddIcon />} text="Add your Caponord" primary />
           </ListItemIcon>
-          <Typography variant="inherit">Add your Caponord</Typography>
         </MenuItem>
         <MenuItem>
           <ListItemIcon>
-            <SearchIcon fontSize="small" />
+            <FormModal icon={<SearchIcon />} text="Your submission" />
           </ListItemIcon>
-          <Typography variant="inherit">Search/edit your submission</Typography>
         </MenuItem>
         <MenuItem>
           <ListItemIcon>
-            <HelpIcon fontSize="small" />
+            <FormModal icon={<HelpIcon />} text="How does it work?" />
           </ListItemIcon>
-          <Typography variant="inherit" noWrap>
-            How does it work?
-            </Typography>
         </MenuItem>
       </MenuList>
-      <Hidden><div id="tab-motorcycles-submit-modal"></div></Hidden>
       <Hidden><div id="tab-motorcycles-help-modal"></div></Hidden>
     </Paper>
   )
