@@ -5,7 +5,6 @@ import { IconButton, Hidden, MenuList, MenuItem, ListItemIcon, Paper, Typography
 import FormModal from '../../FormModal/FormModal'
 import AddIcon from '@material-ui/icons/Add';
 import SearchIcon from '@material-ui/icons/Search';
-import HelpIcon from '@material-ui/icons/Help';
 
 const useStyles = makeStyles({
   root: {
@@ -20,17 +19,12 @@ const Actions = (props) => {
       <MenuList>
         <MenuItem>
           <ListItemIcon>
-            <FormModal icon={<AddIcon />} text="Add your Caponord" primary firebase={props.firebase} />
+            <FormModal icon={<AddIcon />} text="Add your Caponord" primary />
           </ListItemIcon>
         </MenuItem>
         <MenuItem>
           <ListItemIcon>
             <FormModal icon={<SearchIcon />} text="Your submission" />
-          </ListItemIcon>
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <FormModal icon={<HelpIcon />} text="How does it work?" />
           </ListItemIcon>
         </MenuItem>
       </MenuList>

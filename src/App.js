@@ -2,14 +2,12 @@ import React from "react";
 
 import { Footer } from './components/UI';
 import Home from './containers/Home/Home';
-import blue from "@material-ui/core/colors/blue";
 import {
   createMuiTheme,
   makeStyles,
   ThemeProvider,
 } from "@material-ui/core/styles";
 import { CssBaseline } from '@material-ui/core';
-import { orange } from "@material-ui/core/colors";
 
 import { FirebaseContext } from './components/Firebase';
 

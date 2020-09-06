@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Container, Input, Select, FormControl, Grid, InputLabel, Slider, TextField, Typography } from '@material-ui/core';
 import * as firebase from 'firebase/app';
 import PropTypes from 'prop-types';
+import LocationSearch from '../UI/LocationSearch/LocationSearch';
 
 class CapoSubmitForm extends React.Component {
   state = {
@@ -10,8 +11,8 @@ class CapoSubmitForm extends React.Component {
       model: "TP",
       year: "2017",
       registration: "ABC123",
-      latitude: Math.random() * (1 + 50 - -50),
-      longitude: Math.random() * (1 + 50 - -50),
+      latitude: Math.random() * (1 + 45 - -45),
+      longitude: Math.random() * (1 + 45 - -45),
       color: "white",
       mileage: 5000
     },
@@ -42,12 +43,13 @@ class CapoSubmitForm extends React.Component {
       });
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
+    console.log("debug", event.target);
     const name = event.target.name;
-    this.setState({
-      ...this.state,
-      [name]: event.target.value,
-    });
+    let formValues = this.state.formValues;
+    formValues[name] = event.target.value;
+    this.setState({formValues: formValues});
+    console.log("debug", this.state);
   };
 
   inputChangedHandler(event, inputIdentifier) {
@@ -139,8 +141,8 @@ class CapoSubmitForm extends React.Component {
                 onChange={this.handleChange}
                 value={this.state.formValues.model}
                 inputProps={{
-                  name: "mc-model",
-                  id: "mc-model",
+                  name: "model",
+                  id: "model",
                 }}
               >
                 <option value={"ETV"}>ETV</option>
@@ -156,8 +158,8 @@ class CapoSubmitForm extends React.Component {
                 onChange={this.handleChange}
                 value={this.state.formValues.year}
                 inputProps={{
-                  name: "mc-year",
-                  id: "mc-year",
+                  name: "year",
+                  id: "year",
                 }}
               >
                 <option value={2012}>2012</option>
@@ -175,12 +177,12 @@ class CapoSubmitForm extends React.Component {
               <Select
                 native
                 placeholder="color"
-                onChange={(event) => this.handleChange(event, 'color')}
+                onChange={(event) => this.handleChange(event, "color")}
                 helperText="Some important text"
                 value={this.state.formValues.color}
                 inputProps={{
-                  name: "mc-color",
-                  id: "mc-color",
+                  name: "color",
+                  id: "color",
                 }}
               >
                 <option value={"red"}>Red</option>
@@ -196,12 +198,19 @@ class CapoSubmitForm extends React.Component {
           </div>
           <div>
             <FormControl>
-              <TextField
-                id="location"
-                label="Location"
+              <LocationSearch 
+                onChange={this.handleChange}
               />
-              <Input type='hidden' name="latitude" value={ this.state.latitude } />
-              <Input type='hidden' name="longitude" value={ this.state.longitude } />
+              <Input
+                type="hidden"
+                name="latitude"
+                value={this.state.latitude}
+              />
+              <Input
+                type="hidden"
+                name="longitude"
+                value={this.state.longitude}
+              />
             </FormControl>
           </div>
 
@@ -217,6 +226,10 @@ class CapoSubmitForm extends React.Component {
                   min={0}
                   max={150000}
                   scale={(x) => x ** 10}
+                  inputProps={{
+                    name: "mileage",
+                    id: "mileage",
+                  }}
                 />
               </Grid>
             </Grid>
@@ -224,22 +237,24 @@ class CapoSubmitForm extends React.Component {
           <div>
             <FormControl>
               <TextField
-                id="standard-basic"
                 label="Registration"
                 value={this.state.formValues.registration}
                 placeholder="(optional)"
+                inputProps={{
+                  name: "registration",
+                  id: "registration",
+                }}
               />
             </FormControl>
           </div>
           <div>
             <FormControl>
               <TextField
-                id="standard-basic"
                 label="Email"
                 placeholder="(optional)"
               />
             </FormControl>
-                </div>
+          </div>
           <button type="submit"> Add </button>
         </form>
       </Container>

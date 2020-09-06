@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Modal, Fab, Backdrop, Fade, Typography } from '@material-ui/core';
 import CapoSubmitForm from '../../components/CapoSubmitForm/CapoSubmitForm';
+import { FirebaseContext } from "../../components/Firebase";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -59,7 +60,9 @@ export default function FormModal(props) {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <CapoSubmitForm firebase={props.firebase} />
+            <FirebaseContext.Consumer>
+              {(firebase) => <CapoSubmitForm firebase={firebase} />}
+            </FirebaseContext.Consumer>
           </div>
         </Fade>
       </Modal>

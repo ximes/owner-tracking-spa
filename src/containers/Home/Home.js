@@ -22,6 +22,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import EventIcon from "@material-ui/icons/Event";
+import HelpIcon from '@material-ui/icons/Help';
 import LanguageIcon from "@material-ui/icons/Language";
 import LaunchIcon from "@material-ui/icons/Launch";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -29,6 +30,7 @@ import PersonPinCircleIcon from '@material-ui/icons/PersonPinCircle';
 import ScoreIcon from '@material-ui/icons/Score';
 
 import FullwidthMap from '../../components/FullwidthMap/FullwidthMap';
+import Actions from '../../components/Tabs/Actions/Actions';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -63,23 +65,8 @@ const useStyles = (theme) => ({
       padding: "0px",
     },
   },
-  drawer: {
-    [theme.breakpoints.up("sm")]: {
-      width: drawerWidth,
-      flexShrink: 0,
-    },
-  },
-  appBar: {
-    [theme.breakpoints.up("sm")]: {
-      width: `calc(100% - ${drawerWidth}px)`,
-      marginRight: drawerWidth,
-    },
-  },
   menuButton: {
     marginRight: theme.spacing(2),
-    [theme.breakpoints.up("sm")]: {
-      display: "none",
-    },
   },
   // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
@@ -186,6 +173,12 @@ class Home extends React.Component {
             </ListItemIcon>
             <ListItemText>Language</ListItemText>
           </ListItem>
+          <ListItem button key="language">
+            <ListItemIcon>
+              <HelpIcon />
+            </ListItemIcon>
+            <ListItemText>How does it work?</ListItemText>
+          </ListItem>
         </List>
       </div>
     );
@@ -232,6 +225,7 @@ class Home extends React.Component {
                 icon={<EventIcon />}
                 id="events-tab"
                 aria-label={`simple-tab-1`}
+                disabled
               />
               <Tab
                 label="Stats"
@@ -239,6 +233,7 @@ class Home extends React.Component {
                 icon={<ScoreIcon />}
                 id="stats-tab"
                 aria-label={`simple-tab-2`}
+                disabled
               />
             </Tabs>
           </AppBar>
@@ -246,6 +241,7 @@ class Home extends React.Component {
           <div id="tabs" className={classes.tabPanel}>
             <TabPanel value={this.state.activeTab} index="owners-tab">
               <FullwidthMap motorcycles={this.state.motorcycles} />
+              <Actions />
             </TabPanel>
             <TabPanel value={this.state.activeTab} index="events-tab">
               Events - Coming soon
@@ -257,7 +253,7 @@ class Home extends React.Component {
         </main>
 
         <nav className={classes.drawer} aria-label="mailbox folders">
-          <Hidden mdUp implementation="css">
+          <Hidden implementation="css">
             <Drawer
               container={container}
               variant="temporary"
@@ -270,18 +266,6 @@ class Home extends React.Component {
               ModalProps={{
                 keepMounted: true, // Better open performance on mobile.
               }}
-            >
-              {drawer}
-            </Drawer>
-          </Hidden>
-          <Hidden smDown implementation="css">
-            <Drawer
-              classes={{
-                paper: classes.drawerPaper,
-              }}
-              anchor="right"
-              variant="permanent"
-              open={false}
             >
               {drawer}
             </Drawer>
