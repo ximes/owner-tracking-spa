@@ -1,16 +1,14 @@
 import React from 'react';
 import { Container, Link, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { blueGrey } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   footer: {
-    padding: theme.spacing(3, 2),
+    padding: theme.spacing(0.3),
     marginTop: "auto",
-    backgroundColor:
-      theme.palette.type === "light"
-        ? theme.palette.grey[200]
-        : theme.palette.grey[800],
-  },
+    backgroundColor: blueGrey[200]
+  }
 }));
 
 const Footer = () => {
@@ -19,16 +17,17 @@ const Footer = () => {
   return (
     <footer className={classes.footer}>
       <Container maxWidth="xs">
-        <Typography variant="body2" color="textSecondary">
-          {"Copyright © "}
+        <Typography align="center" variant="body2" color="textSecondary">
           <Link color="inherit" href="https://caponordregistry.com/">
-            caponordregistry.com
-          </Link>{" "}
-          {new Date().getFullYear()}
+            ©{" "}{new Date().getFullYear()}</Link>
           {" - "}
-          <Link color="inherit" href="https://caponordregistry.com/">Privacy</Link>
+          <Link color="inherit" to="/help#privacy">
+            Privacy
+          </Link>
           {" - "}
-          <Link color="inherit" href="https://caponordregistry.com/">Credits</Link>
+          <Link color="inherit" href="/help#credits">
+            Credits
+          </Link>
         </Typography>
       </Container>
     </footer>

@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   map: {
     [theme.breakpoints.up("sm")]: {
       width: "100%",
-      height: "550px",
+      height: "400px",
     },
     [theme.breakpoints.down("xs")]: {
       width: "100%",
