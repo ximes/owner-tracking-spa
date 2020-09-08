@@ -2,17 +2,24 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Modal, Fab, Backdrop, Fade, Typography } from '@material-ui/core';
 import CapoSubmitForm from '../../components/CapoSubmitForm/CapoSubmitForm';
+import AddIcon from "@material-ui/icons/Add";
 import { FirebaseContext } from "../../components/Firebase";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  fab: {
+    position: "absolute",
+    bottom: theme.spacing(2),
+    right: theme.spacing(3),
+    zIndex: 10000,
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
+    border: "2px solid #000",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
@@ -37,7 +44,7 @@ export default function FormModal(props) {
 
   return (
     <div>
-      <Fab
+      {/* <Fab
         color={props.primary ? "primary" : ""}
         aria-label="add"
         onClick={handleOpen}
@@ -45,6 +52,14 @@ export default function FormModal(props) {
       >
         {props.icon}
         <Typography variant="inherit">{props.text}</Typography>
+      </Fab> */}
+      <Fab
+        aria-label="Add your Caponord"
+        onClick={handleOpen}
+        className={classes.fab}
+        color="primary"
+      >
+        <AddIcon />
       </Fab>
       <Modal
         aria-labelledby="transition-modal-title"

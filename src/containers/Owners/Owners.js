@@ -1,31 +1,18 @@
 import React from 'react';
-import {
-  AppBar,
-  Box,
-  Tab,
-  Tabs,
-  Typography,
-} from "@material-ui/core";
 
-import Button from '@material-ui/core/Button';
-import CameraIcon from '@material-ui/icons/PhotoCamera';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Grid from '@material-ui/core/Grid';
-import Toolbar from '@material-ui/core/Toolbar';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
+import { Container, Grid, Link, Typography } from '@material-ui/core';
+import { withStyles } from "@material-ui/core/styles";
+
 import OwnersMap from "../OwnersMap/OwnersMap";
 
-import { withStyles } from '@material-ui/core/styles';
-
 import { FirebaseContext } from "../../components/Firebase";
-const useStyles = (theme) => ({
 
+const useStyles = (theme) => ({
+  spacer: theme.mixins.toolbar,
+  cardGrid: {
+    paddingTop: theme.spacing(0),
+    paddingBottom: theme.spacing(8),
+  },
 });
 
 class Owners extends React.Component {
@@ -73,17 +60,17 @@ class Owners extends React.Component {
 
     return (
       <div className={classes.root}>
-        <Container className={classes.cardGrid} maxWidth="md">
-          {/* End hero unit */}
+        <FirebaseContext.Consumer>
+          {(firebase) => <OwnersMap firebase={firebase} />}
+        </FirebaseContext.Consumer>
+
+        <div className={classes.spacer} />
+
+        <Container className={classes.cardGrid}>
           <Grid container spacing={4}>
-            <FirebaseContext.Consumer>
-              {(firebase) => <OwnersMap firebase={firebase} />}
-            </FirebaseContext.Consumer>
-          </Grid>
-          <Grid container spacing={4}>
-            {cards.map((post) => (
-              <div>{post}</div>
-            ))}
+            <Typography variant="h2" component="h2">
+              Statistics
+            </Typography>
           </Grid>
         </Container>
       </div>
