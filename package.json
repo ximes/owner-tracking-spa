@@ -23,11 +23,12 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && echo '/* /index.html 200' > ./build/_redirects",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "start-production": "npm run build && npx http-server --proxy http://localhost:8080? ./build"
   },
   "eslintConfig": {
     "extends": "react-app"
