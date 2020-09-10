@@ -32,8 +32,8 @@ const LeafletMap = (props) => {
   const defaultZoom = 3;
 
   const ownerMarkerList = () => {
-    const items = props.items.map(({ key, ...props }) => (
-      <OwnerMarker key={key} {...props} />
+    const items = props.items.map(({ key, ...props }, index) => (
+      <OwnerMarker key={index} {...props} />
     ));
     return <Fragment>{items}</Fragment>;
   };

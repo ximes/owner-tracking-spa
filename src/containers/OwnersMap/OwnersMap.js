@@ -1,61 +1,17 @@
 import React from 'react';
 
-import { withStyles } from '@material-ui/core/styles';
-import {Fab, Zoom} from "@material-ui/core";
+import { Zoom } from "@material-ui/core";
 import Map from '../../components/Map/Map';
 
-
-import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import Backdrop from "@material-ui/core/Backdrop";
-import SpeedDial from "@material-ui/lab/SpeedDial";
-import AddIcon from "@material-ui/icons/Add";
 import OwnersMapActions from "./OwnersMapActions";
-import SpeedDialIcon from "@material-ui/lab/SpeedDialIcon";
-import SpeedDialAction from "@material-ui/lab/SpeedDialAction";
-import FileCopyIcon from "@material-ui/icons/FileCopyOutlined";
-import SaveIcon from "@material-ui/icons/Save";
-import PrintIcon from "@material-ui/icons/Print";
-import ShareIcon from "@material-ui/icons/Share";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    height: 380,
-    transform: "translateZ(0px)",
-    flexGrow: 1,
-  },
-  fab: {
-    position: "absolute",
-    bottom: 0,
-    bottom: theme.spacing(2),
-    right: theme.spacing(2),
-  },
-  speedDial: {
-    position: "absolute",
-    bottom: theme.spacing(2),
-    right: theme.spacing(2),
-  },
-}));
-
-const actions = [{ icon: <AddIcon />, name: "Add your Caponord " }];
 
 class OwnersMap extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeTab: "owners-tab",
-      mobileOpen: false,
       motorcycles: [],
-      hidden: false,
-      open: false
     };
   }
-
-  handleTabChange = (event, newValue) => {
-    this.setState({ activeTab: newValue });
-  };
 
   componentWillMount() {
     this.props.firebase.motorcycles().onSnapshot(
@@ -97,37 +53,17 @@ class OwnersMap extends React.Component {
     this.setState({motorcycles: mcList});
   };
 
-  handleDrawerToggle = () => {
-    this.setState({ mobileOpen: !this.state.mobileOpen });
-  };
-
-
-  handleVisibility = () => {
-    this.setState({hidden: !this.state.hidden});
-  };
-
-  handleOpen = () => {
-    this.setState({open: true});
-  };
-
-  handleClose = () => {
-    this.setState({open: false});
-  };
-
-
   render() {
     const { classes, ..._ } = this.props;
 
     return (
       <OwnersMapActions>
         <Zoom in={true}>
-          <div className={classes.root}>
-            <Map items={this.state.motorcycles} />
-          </div>
+          <Map items={this.state.motorcycles} />
         </Zoom>
       </OwnersMapActions>
     );
   }
 }
 
-export default withStyles(useStyles)(OwnersMap);
+export default OwnersMap;
