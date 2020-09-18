@@ -1,9 +1,8 @@
-import React, { Fragment, useEffect } from 'react'
-//import L from 'leaflet'
+import React, { Fragment } from 'react'
 import { Map, TileLayer } from "react-leaflet";
 import { makeStyles } from "@material-ui/core/styles";
 import Loader from "../UI/Loader/Loader";
-import OwnerMarker from "./Owners/OwnerMarker";
+import OwnerMarker from "./Markers/OwnerMarker";
 
 // Temporarly disabled. We need to switch db for better geoquery searches
 {/* <MarkerClusterGroup> */}
@@ -11,14 +10,7 @@ import OwnerMarker from "./Owners/OwnerMarker";
 
 const useStyles = makeStyles((theme) => ({
   map: {
-    [theme.breakpoints.up("sm")]: {
-      width: "100%",
-      height: "600px",
-    },
-    [theme.breakpoints.down("xs")]: {
-      width: "100%",
-      maxHeight: "400px",
-    },
+    width: "100%",
   },
 }));
 
@@ -31,25 +23,35 @@ const LeafletMap = (props) => {
   const centerLng = 12.0722;
   const defaultZoom = 3;
 
-  const ownerMarkerList = () => {
-    const items = props.items.map(({ key, ...props }, index) => (
-      <OwnerMarker key={index} {...props} />
+  const ownerMarkerList = () => {  
+    const items = props.items.map(({ key, ...itemDetails }, index) => (
+      <OwnerMarker
+        detailed={props.detailed}
+        key={index}
+        {...itemDetails}
+      />
     ));
     return <Fragment>{items}</Fragment>;
   };
 
-  const mapLayer = <Map
-    center={[centerLat, centerLng]}
-    zoom={defaultZoom}
-    className={classes.map}
-    minZoom={3}
-  >
-    <TileLayer
-      attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-      url="https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png"
-    />
-    {ownerMarkerList()}
-  </Map>
+  const mapLayer = (
+    <Map
+      center={[centerLat, centerLng]}
+      zoom={defaultZoom}
+      className={classes.map}
+      minZoom={1}
+      maxZoom={8}
+      style={{
+        height: props.detailed ? "450px" : `${window.innerHeight / 3}px`,
+      }}
+    >
+      <TileLayer
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+        url="https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png"
+      />
+      {ownerMarkerList(props)}
+    </Map>
+  );
 
   return props.items ? mapLayer : <Loader />;
 }

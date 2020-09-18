@@ -115,16 +115,18 @@ export default function GoogleMaps(props) {
         setInputValue(newInputValue);
       }}
       renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Add a location"
-            variant="outlined"
-            name="place_id"
-            onChange={props.onChange}
-            fullWidth
-          />
-        )     
-      }
+        <TextField
+          {...params}
+          label="Your location"
+          name="place_id"
+          onChange={props.onChange}
+          fullWidth
+          inputProps={{
+            ...params.inputProps,
+            autoComplete: "new-password", // disable autocomplete and autofill
+          }}
+        />
+      )}
       renderOption={(option) => {
         const matches =
           option.structured_formatting.main_text_matched_substrings;

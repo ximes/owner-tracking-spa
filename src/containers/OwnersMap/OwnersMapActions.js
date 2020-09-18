@@ -1,98 +1,143 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import { IconButton, Hidden, MenuList, MenuItem, ListItemIcon, Paper, Typography } from '@material-ui/core';
-import FormModal from '../../components/FormModal/FormModal'
+import { Backdrop, Drawer, Fab, Fade, Hidden, Modal, Paper, AppBar, Toolbar } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
-import SearchIcon from '@material-ui/icons/Search';
-
-import { withStyles } from "@material-ui/core/styles";
-import { Fab, Zoom } from "@material-ui/core";
-import Map from "../../components/Map/Map";
-
+import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import Backdrop from "@material-ui/core/Backdrop";
-import SpeedDial from "@material-ui/lab/SpeedDial";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
 
-import SpeedDialIcon from "@material-ui/lab/SpeedDialIcon";
-import SpeedDialAction from "@material-ui/lab/SpeedDialAction";
-import FileCopyIcon from "@material-ui/icons/FileCopyOutlined";
-import SaveIcon from "@material-ui/icons/Save";
-import PrintIcon from "@material-ui/icons/Print";
-import ShareIcon from "@material-ui/icons/Share";
-import FavoriteIcon from "@material-ui/icons/Favorite";
+import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
+import { FirebaseContext } from "../../components/Firebase";
+
+
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+import Switch from '@material-ui/core/Switch';
+
 
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    height: 380,
-    transform: "translateZ(0px)",
+  fab: {
+    position: "relative ",
+    left: theme.spacing(2),
+    bottom: theme.spacing(2),
+    zIndex: 1000,
+  },
+  // modal: {
+  //   display: "flex",
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  // },
+  paper: {
+    backgroundColor: "white",
+  },
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    margin: "auto",
+    width: "fit-content",
+  },
+  formControl: {
+    marginTop: theme.spacing(2),
+    minWidth: 120,
+  },
+  formControlLabel: {
+    marginTop: theme.spacing(1),
+  },
+  menuButton: {
+    marginRight: theme.spacing(0),
+  },
+  title: {
     flexGrow: 1,
   },
-  fab: {
+  closeButton: {
     position: "absolute",
-    bottom: theme.spacing(2),
-    right: theme.spacing(3),
-    zIndex: 10000,
-  },
-  speedDial: {
-    position: "absolute",
-    bottom: theme.spacing(2),
-    right: theme.spacing(3),
+    right: theme.spacing(1),
+    top: theme.spacing(0),
+    color: theme.palette.grey[500],
   },
 }));
 
-const actions = [{ icon: <AddIcon />, name: "Add your Caponord " }];
-
 const OwnersMapActions = (props) => {
   const classes = useStyles();
+  const [open, setOpen] = React.useState(true);
 
+   const handleOpen = () => {
+     setOpen(true);
+   };
+
+   const handleClose = () => {
+     setOpen(false);
+   };
+
+  const formContents = (
+    <FirebaseContext.Consumer>
+      {(firebase) => <RegistrationForm firebase={firebase} />}
+    </FirebaseContext.Consumer>
+  );
+
+  const closeButtonIcon = (
+    <IconButton
+      edge="end"
+      className={classes.menuButton}
+      color="inherit"
+      aria-label="menu"
+      onClick={handleClose}
+    >
+      <CloseIcon />
+    </IconButton>
+  );
+
+  const formTitle = "Register your Caponord";
   return (
-    <div>
-      {/* <Paper className={classes.root}> */}
-
-      {/* <MenuList>
-        <MenuItem>
-          <ListItemIcon>
-            <FormModal icon={<AddIcon />} text="Add your Caponord" primary />
-          </ListItemIcon>
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <FormModal icon={<SearchIcon />} text="Your submission" />
-          </ListItemIcon>
-        </MenuItem>
-      </MenuList> */}
-
-      {/* <Fab
+    <div className={classes.root}>
+      <Fab
         aria-label="Add your Caponord"
+        onClick={handleOpen}
         className={classes.fab}
         color="primary"
       >
         <AddIcon />
-      </Fab> */}
-      <FormModal icon={<AddIcon />} text="Add your Caponord" primary />
-      {props.children}
-      {/* <SpeedDial
-        ariaLabel="SpeedDial tooltip example"
-        className={classes.speedDial}
-        hidden={this.state.hidden}
-        icon={<SpeedDialIcon />}
-        onClose={this.handleClose}
-        onOpen={this.handleOpen}
-        open={this.state.open}
-      >
-        {actions.map((action) => (
-          <SpeedDialAction
-            key={action.name}
-            icon={action.icon}
-            tooltipTitle={action.name}
-            tooltipOpen
-            onClick={this.handleClose}
-          />
-        ))}
-      </SpeedDial> */}
-      {/* </Paper> */}
+      </Fab>
+      <Hidden smDown implementation="js">
+        <Dialog
+          fullWidth={true}
+          maxWidth={"sm"}
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="max-width-dialog-title"
+        >
+          <DialogActions className={classes.closeButton}>
+            {closeButtonIcon}
+          </DialogActions>
+          <DialogTitle>{formTitle}</DialogTitle>
+          <DialogContent>
+            {formContents}
+          </DialogContent>
+        </Dialog>
+      </Hidden>
+      <Hidden smUp implementation="js">
+        <Drawer anchor="bottom" open={open} onClose={handleClose}>
+          <AppBar position="static">
+            <Toolbar>
+              <Typography variant="h6" className={classes.title}>
+                {formTitle}
+              </Typography>
+              {closeButtonIcon}
+            </Toolbar>
+          </AppBar>
+          {formContents}
+        </Drawer>
+      </Hidden>
     </div>
   );
 }

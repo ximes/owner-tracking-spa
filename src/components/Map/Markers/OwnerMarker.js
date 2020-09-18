@@ -51,7 +51,7 @@ const OwnerMarker = (props) => {
   const classes = useStyles();
   const ref = useRef(null);
 
-  let { content, position, ...a } = props;
+  let { content, position, ..._ } = props;
 
   let modelInitials = "";
   switch (props.content.model) {
@@ -121,33 +121,35 @@ const OwnerMarker = (props) => {
     <ListItemText primary={`${content.mileage} km`} />
   </ListItem> : null;
 
+  let details = (
+    <Popup>
+      <List component="ul">
+        <ListItem>
+          <ListItemAvatar>
+            <Avatar className={clsx(classes.xs, colorClass)}>
+              {modelInitials}
+            </Avatar>
+          </ListItemAvatar>
+          <ListItemText primary="Color" />
+        </ListItem>
+        <ListItem>
+          <ListItemAvatar>
+            <Avatar className={classes.xs}>
+              <DirectionsBikeIcon />
+            </Avatar>
+          </ListItemAvatar>
+          <ListItemText>
+            {content.model} <Chip size="small" label={content.year} />
+          </ListItemText>
+        </ListItem>
+        {mileage}
+      </List>
+    </Popup>
+  );
+
   return (
     <Marker position={props.position} icon={MarkerIcon} ref={ref}>
-      <Popup>
-        <List component="ul">
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar className={clsx(classes.xs, colorClass)}>
-                {modelInitials}
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Color" />
-          </ListItem>
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar className={classes.xs}>
-                <DirectionsBikeIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText>
-              {content.model}
-              {" "}
-              <Chip size="small" label={content.year} />
-            </ListItemText>
-          </ListItem>
-          {mileage}
-        </List>
-      </Popup>
+      {props.detailed ? details : null}
     </Marker>
   );
 };

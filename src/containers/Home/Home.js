@@ -11,7 +11,7 @@ import { PieChart, Pie, Sector, Cell } from "recharts";
 
 import { FirebaseContext } from "../../components/Firebase";
 
-const useStyles = (theme) => ({
+const styles = (theme) => ({
   spacer: theme.mixins.toolbar,
   cardGrid: {
     paddingTop: theme.spacing(0),
@@ -65,7 +65,10 @@ class Home extends React.Component {
 
     return (
       <div className={classes.root}>
-        <Hero showHeaderTitleCallback={this.props.showHeaderTitleCallback} />
+        <Hero
+          showHeaderTitleCallback={this.props.showHeaderTitleCallback}
+          openRegistrationModal={this.props.openRegistrationModalCallback}
+        />
         <FirebaseContext.Consumer>
           {(firebase) => <OwnersMap firebase={firebase} />}
         </FirebaseContext.Consumer>
@@ -91,4 +94,4 @@ class Home extends React.Component {
   }
 }
 
-export default withStyles(useStyles)(Home)
+export default withStyles(styles)(Home)
