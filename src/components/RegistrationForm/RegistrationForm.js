@@ -3,22 +3,19 @@ import {
   Avatar,
   Button,
   Container,
-  FormHelperText,
   Grid,
-  Input,
   FormControl,
   InputLabel,
   MenuItem,
   Select,
   Slider,
-  TextField,
+  TextField
 } from "@material-ui/core";
 import SaveIcon from "@material-ui/icons/Save";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 
 import LocationSearch from "../UI/LocationSearch/LocationSearch";
-
 import * as firebase from 'firebase/app';
 
 const useStyles = makeStyles((theme) => ({
@@ -37,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   colorOptionDot: {
     width: theme.spacing(2),
     height: theme.spacing(2),
-    border: "1px solid #cccccc",
+    border: "1px solid #666666",
     marginRight: theme.spacing(2),
   },
 }));
@@ -46,55 +43,59 @@ const RegistrationForm = (props) => {
   const classes = useStyles();
 
   const [formValues, setFormValues] = useState({
-      model: null,
-      year: null,
-      registration: null,
-      latitude: Math.random() * (1 + 45 - -45),
-      longitude: Math.random() * (1 + 45 - -45),
-      color: null,
-      mileage: 1000,
-      email: null
-    });
+    locationLatitude: undefined,
+    locationLongitude: undefined,
+    locationName: undefined,
+    locationCountryCode: undefined,
+    model: undefined,
+    year: undefined,
+    registration: null,
+    color: undefined,
+    mileage: 1000,
+  });
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    let { latitude, longitude, ...mcData } = { ...formValues };
+    let { locationLatitude, locationLongitude, ...mcData } = { ...formValues };
 
     const data = {
       uid: new Date().getTime(),
       ...mcData,
       location: new firebase.firestore.GeoPoint(
-        formValues.latitude,
-        formValues.longitude
+        formValues.locationLatitude,
+        formValues.locationLongitude,
       ),
     };
 
-    console.log("debug", data);
-return false;
     props.firebase
       .motorcycles()
       .doc(data.uid.toString())
       .set(data)
       .then(() => {
         console.log("debug: A new MC has been added", "Success");
+        props.afterSubmit();
       })
       .catch((error) => {
         console.log(error.message, "debug: Create MC failed");
       });
-    
   };
 
+  const handleLocationChange = (name, lat, lng, code) => {
+    setFormValues(prevValues => ({
+      ...prevValues,
+      locationName: name,
+      locationCountryCode: code,
+      locationLatitude: lat,
+      locationLongitude: lng
+    }));
+  }
+
   const handleChange = (event) => {
-    const name = event.target.name;
-    console.log("debug", name)
-    let updatedFormValues = formValues;
-    updatedFormValues[name] = event.target.value;
-    updatedFormValues.model = "10";
-    console.log("debug", formValues);
-    setFormValues(updatedFormValues);
-    console.log("debug", formValues);
-    console.log("debug", formValues.model);
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      [event.target.name]: event.target.value,
+    }));
   };
 
   const handleSliderChange = (event, value) => {
@@ -108,7 +109,7 @@ return false;
     const classes = useStyles();
 
     return (
-      <MenuItem value={colorKey}>
+      <div style={{ display: "flex", flexFlow: "row wrap" }}>
         <Avatar
           size="small"
           className={classes.colorOptionDot}
@@ -117,11 +118,10 @@ return false;
           {""}
         </Avatar>
         {label}
-      </MenuItem>
+      </div>
     );
   };
   
-
   const marks = [
     { value: 1000, label: "0km" },
     { value: 10000 },
@@ -144,7 +144,7 @@ return false;
     { key: "tp", label: "Caponord 1200 Travel Pack" },
     { key: "raid", label: "ETV 1000 Raid" },
     { key: "rally", label: "Caponord 1200 Rally" },
-  ].map(({ key, label }) => <MenuItem value={key}>{label}</MenuItem>);
+  ].map(({ key, label }) => <MenuItem key={key} value={key}>{label}</MenuItem>);
 
   const colorOptions = [
     { key: "green", colorCode: "#2f4f28", label: "Army Green" },
@@ -156,19 +156,21 @@ return false;
     { key: "red", colorCode: "#ff0000", label: "Red" },
     { key: "white", colorCode: "#ffffff", label: "White" },
   ].map(({ key, colorCode, label }) => (
-  <ColorLabeledOption colorKey={key} colorCode={colorCode} label={label} />
+    <MenuItem key={key} value={key} selected={formValues === key}>
+      <ColorLabeledOption colorKey={key} colorCode={colorCode} label={label} />
+    </MenuItem>
   ));
 
   const yearsOptions = Array.from(yearRange(2003, 2017)).map((year) => (
-    <MenuItem value={year}>{year}</MenuItem>
+    <MenuItem key={year} value={year}>{year}</MenuItem>
   ));
 
   return (
     <Container>
-      <form onSubmit={handleSubmit} className={classes.root} noValidate>
+      <form onSubmit={handleSubmit} className={classes.root}>
         <Grid container spacing={(3, 0)}>
           <Grid item xs={12} sm={6} md={6}>
-            <FormControl className={classes.formControl}>
+            <FormControl required className={classes.formControl}>
               <InputLabel id="model-label">Model</InputLabel>
               <Select
                 labelId="model-label"
@@ -184,7 +186,6 @@ return false;
               >
                 {modelOptions}
               </Select>
-              <FormHelperText>Required</FormHelperText>
             </FormControl>
           </Grid>
           <Grid item xs={6} sm={3} md={2}>
@@ -196,6 +197,7 @@ return false;
                 label="Year"
                 fullWidth={true}
                 onChange={handleChange}
+                value={formValues.year}
                 inputProps={{
                   name: "year",
                   id: "year",
@@ -203,7 +205,6 @@ return false;
               >
                 {yearsOptions}
               </Select>
-              <FormHelperText>Required</FormHelperText>
             </FormControl>
           </Grid>
           <Grid item xs={6} sm={4} md={4}>
@@ -213,8 +214,9 @@ return false;
                 labelId="color-label"
                 onChange={handleChange}
                 error={false}
-                label="Color"
+                id="color"
                 fullWidth={true}
+                value={formValues.color}
                 inputProps={{
                   name: "color",
                   id: "color",
@@ -222,19 +224,36 @@ return false;
               >
                 {colorOptions}
               </Select>
-              <FormHelperText>Required</FormHelperText>
             </FormControl>
           </Grid>
         </Grid>
 
         <FormControl
           className={clsx(classes.formControl, classes.formLocation)}
+          required
           fullWidth={true}
         >
-          <LocationSearch onChange={handleChange} />
-          <FormHelperText>Required</FormHelperText>
-          <Input type="hidden" name="latitude" value={formValues.latitude} />
-          <Input type="hidden" name="longitude" value={formValues.longitude} />
+          <input
+            type="hidden"
+            name="locationName"
+            value={formValues.locationName}
+          />
+          <input
+            type="hidden"
+            name="locationCountryCode"
+            value={formValues.locationCountryCode}
+          />
+          <input
+            type="hidden"
+            name="locationLatitude"
+            value={formValues.locationLatitude}
+          />
+          <input
+            type="hidden"
+            name="locationLongitude"
+            value={formValues.locationLongitude}
+          />
+          <LocationSearch onChange={handleLocationChange} required />
         </FormControl>
 
         <FormControl className={classes.formControl} fullWidth={true}>
@@ -265,22 +284,8 @@ return false;
             id: "registration",
           }}
           onChange={handleChange}
-          helperText="This value won't be shown to public"
+          helperText="This value won't be shown to public (optional)"
           fullWidth={true}
-        />
-
-        <TextField
-          label="Email"
-          placeholder="(optional)"
-          helperText="This value won't be shown to public"
-          fullWidth={true}
-          error={false}
-          onChange={handleChange}
-          value={formValues.email}
-          inputProps={{
-            name: "email",
-            id: "email",
-          }}
         />
 
         <FormControl

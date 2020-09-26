@@ -1,162 +1,49 @@
 import React from "react";
-import TextField from "@material-ui/core/TextField";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import LocationOnIcon from "@material-ui/icons/LocationOn";
-import Grid from "@material-ui/core/Grid";
-import Input from "@material-ui/core/Input";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import parse from "autosuggest-highlight/parse";
-import throttle from "lodash/throttle";
+import { TextField } from "@material-ui/core";
+import { Autocomplete, LoadScript } from "@react-google-maps/api";
 
-function loadScript(src, position, id) {
-  if (!position) {
-    return;
-  }
+function LocationSearch(props) {
+  const [autocomplete, setAutocomplete] = React.useState();
 
-  const script = document.createElement("script");
-  script.setAttribute("async", "");
-  script.setAttribute("id", id);
-  script.src = src;
-  position.appendChild(script);
-}
+  const onLoad = (autocomplete) => {
+    setAutocomplete(autocomplete);
+  };
 
-const autocompleteService = { current: null };
+  const onPlaceChanged = () => {
+    if (autocomplete !== null) {
+      let place = autocomplete.getPlace();
 
-const useStyles = makeStyles((theme) => ({
-  icon: {
-    color: theme.palette.text.secondary,
-    marginRight: theme.spacing(2),
-  },
-}));
-
-export default function GoogleMaps(props) {
-  const classes = useStyles();
-  const [value, setValue] = React.useState(null);
-  const [inputValue, setInputValue] = React.useState("");
-  const [options, setOptions] = React.useState([]);
-  const loaded = React.useRef(false);
-  const mapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
-
-  if (typeof window !== "undefined" && !loaded.current) {
-    if (!document.querySelector("#google-maps")) {
-      loadScript(
-        `https://maps.googleapis.com/maps/api/js?key=${mapsApiKey}&libraries=places&types=geocode,country`,
-        document.querySelector("head"),
-        "google-maps"
+      props.onChange(
+        place.name,
+        place.geometry.location.lat.call(),
+        place.geometry.location.lng.call(),
+        place.address_components.filter((v) => v.types[0] === "country")[0]
+          .short_name
       );
+    } else {
+      console.log("Autocomplete is not loaded yet!");
     }
-
-    loaded.current = true;
-  }
-
-  const fetch = React.useMemo(
-    () =>
-      throttle((request, callback) => {
-        autocompleteService.current.getPlacePredictions(request, callback);
-      }, 200),
-    []
-  );
-
-  React.useEffect(() => {
-    let active = true;
-
-    if (!autocompleteService.current && window.google) {
-      autocompleteService.current = new window.google.maps.places.AutocompleteService();
-    }
-    if (!autocompleteService.current) {
-      return undefined;
-    }
-
-    if (inputValue === "") {
-      setOptions(value ? [value] : []);
-      return undefined;
-    }
-
-    fetch({ input: inputValue }, (results) => {
-      if (active) {
-        let newOptions = [];
-
-        if (value) {
-          newOptions = [value];
-        }
-
-        if (results) {
-          newOptions = [...newOptions, ...results];
-        }
-
-        setOptions(newOptions);
-      }
-    });
-
-    return () => {
-      active = false;
-    };
-  }, [value, inputValue, fetch]);
+  };
 
   return (
-    <Autocomplete
-      id="google-map-demo"
-      style={{ width: 300 }}
-      getOptionLabel={(option) =>
-        typeof option === "string" ? option : option.description
-      }
-      filterOptions={(x) => x}
-      options={options}
-      autoComplete
-      includeInputInList
-      filterSelectedOptions
-      value={value}
-      onChange={(event, newValue) => {
-        setOptions(newValue ? [newValue, ...options] : options);
-        setValue(newValue);
-      }}
-      onInputChange={(event, newInputValue) => {
-        setInputValue(newInputValue);
-      }}
-      renderInput={(params) => (
+    <LoadScript
+      googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
+      libraries={["places"]}
+    >
+      <Autocomplete
+        onLoad={onLoad}
+        onPlaceChanged={onPlaceChanged}
+        types={["(regions)"]}
+        fields={["address_components", "geometry.location", "name"]}
+      >
         <TextField
-          {...params}
-          label="Your location"
-          name="place_id"
-          onChange={props.onChange}
-          fullWidth
-          inputProps={{
-            ...params.inputProps,
-            autoComplete: "new-password", // disable autocomplete and autofill
-          }}
+          helperText="This is going to be displayed on a map. Stick it to city-level"
+          fullWidth={true}
+          error={false}
         />
-      )}
-      renderOption={(option) => {
-        const matches =
-          option.structured_formatting.main_text_matched_substrings;
-        const parts = parse(
-          option.structured_formatting.main_text,
-          matches.map((match) => [match.offset, match.offset + match.length])
-        );
-
-        return (
-          <Grid container alignItems="center">
-            <Grid item>
-              <LocationOnIcon className={classes.icon} />
-            </Grid>
-            <Grid item xs>
-              {parts.map((part, index) => (
-                <span
-                  key={index}
-                  style={{ fontWeight: part.highlight ? 700 : 400 }}
-                >
-                  {part.text}
-                </span>
-              ))}
-
-              <Typography variant="body2" color="textSecondary">
-                {option.structured_formatting.secondary_text}
-              </Typography>
-            </Grid>
-          </Grid>
-        );
-      }}
-    />
+      </Autocomplete>
+    </LoadScript>
   );
 }
+ 
+export default React.memo(LocationSearch);
