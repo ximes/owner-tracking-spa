@@ -19,12 +19,13 @@ const styles = (_theme) => ({
 class OwnersMap extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       motorcycles: [],
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.firebase.motorcycles().onSnapshot(
       function (snapshot) {
         let allMotorcycles = this.state.motorcycles;
@@ -78,7 +79,7 @@ class OwnersMap extends React.Component {
       },
       position: {
         lat: mc["location"]["ef"],
-        lon: mc["location"]["nf"],
+        lng: mc["location"]["nf"],
       },
     };
   };

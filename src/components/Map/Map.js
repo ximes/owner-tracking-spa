@@ -3,15 +3,14 @@ import { Map, TileLayer } from "react-leaflet";
 import { makeStyles } from "@material-ui/core/styles";
 import Loader from "../UI/Loader/Loader";
 import OwnerMarker from "./Markers/OwnerMarker";
-
-// Temporarly disabled. We need to switch db for better geoquery searches
-{/* <MarkerClusterGroup> */}
-// import MarkerClusterGroup from "react-leaflet-markercluster";
+import MarkerClusterGroup from "react-leaflet-markercluster";
+require("react-leaflet-markercluster/dist/styles.min.css"); 
 
 const useStyles = makeStyles((theme) => ({
   map: {
+    height: "400px",
     width: "100%",
-  },
+  }
 }));
 
 //todo: 
@@ -21,7 +20,7 @@ const LeafletMap = (props) => {
 
   const centerLat = 45.55048;
   const centerLng = 12.0722;
-  const defaultZoom = 3;
+  const defaultZoom = 2;
 
   const ownerMarkerList = () => {  
     const items = props.items.map(({ key, ...itemDetails }, index) => (
@@ -49,7 +48,9 @@ const LeafletMap = (props) => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
         url="https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png"
       />
-      {ownerMarkerList(props)}
+      <MarkerClusterGroup showCoverageOnHover={false}  className={classes.hhh}>
+        {ownerMarkerList(props)}
+      </MarkerClusterGroup>
     </Map>
   );
 

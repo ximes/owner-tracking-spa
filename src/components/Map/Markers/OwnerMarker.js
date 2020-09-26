@@ -51,7 +51,7 @@ const OwnerMarker = (props) => {
   const classes = useStyles();
   const ref = useRef(null);
 
-  let { content, position, ..._ } = props;
+  let { content } = props;
 
   let modelInitials = "";
   switch (props.content.model) {
