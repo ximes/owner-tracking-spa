@@ -25,7 +25,7 @@ const GridCard = (props) => {
     const icon = props.icon ? props.icon : <BarChartRoundedIcon fontSize="large" />;
 
     return (
-      <Grid item sm={12} md={3}>
+      <Grid item xs={12} sm={12} md={3}>
         <Card className={classes.card}>
           <CardHeader
             avatar={icon}
