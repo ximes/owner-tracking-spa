@@ -46,10 +46,19 @@ function App() {
   const classes = useStyles();
 
   const [showHeaderTitle, setShowHeaderTitle] = React.useState(false);
+  const [registrationFormOpen, setRegistrationFormOpen] = React.useState(false);
 
   const handleShowHeaderTitle = (showTitle) => {
     setShowHeaderTitle(showTitle);
   };
+
+   const handleRegistrationDrawerOpen = () => {
+     setRegistrationFormOpen(true);
+   };
+
+   const handleRegistrationDrawerClose = () => {
+     setRegistrationFormOpen(false);
+   };
 
   return (
     <div className={classes.root}>
@@ -61,18 +70,24 @@ function App() {
             <div className={classes.toolbar} />
             <Suspense fallback={<Loader />}>
               <Switch>
-                <Route exact path="/owners" component={Owners} />
-                <Route exact path="/help">
-                  Help (TODO)
-                </Route>
-                <Route exact path="/events">
-                  Events (TODO)
-                </Route>
-                <Route exact path="/accounts">
-                  Account (TODO)
+                <Route exact path="/owners">
+                  <Owners
+                    registrationFormOpen={registrationFormOpen}
+                    handleRegistrationDrawerOpen={handleRegistrationDrawerOpen}
+                    handleRegistrationDrawerClose={
+                      handleRegistrationDrawerClose
+                    }
+                  />
                 </Route>
                 <Route path="/">
-                  <Home showHeaderTitleCallback={handleShowHeaderTitle} />
+                  <Home
+                    showHeaderTitleCallback={handleShowHeaderTitle}
+                    registrationFormOpen={registrationFormOpen}
+                    handleRegistrationDrawerOpen={handleRegistrationDrawerOpen}
+                    handleRegistrationDrawerClose={
+                      handleRegistrationDrawerClose
+                    }
+                  />
                 </Route>
               </Switch>
             </Suspense>
