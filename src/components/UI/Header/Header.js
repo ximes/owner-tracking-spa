@@ -5,11 +5,9 @@ import { AppBar, Button, Drawer, Grow, Hidden, IconButton, List, ListItem, ListI
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { blueGrey, red } from "@material-ui/core/colors";
 
-import EventIcon from "@material-ui/icons/Event";
+// import EventIcon from "@material-ui/icons/Event";
 import HelpIcon from "@material-ui/icons/Help";
 import HomeIcon from "@material-ui/icons/Home";
-import LanguageIcon from "@material-ui/icons/Language";
-import LaunchIcon from "@material-ui/icons/Launch";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import PersonPinCircleIcon from "@material-ui/icons/PersonPinCircle";
 
@@ -160,7 +158,7 @@ const Header = (props) => {
             >
               Motorcycles
             </HeaderButton>
-            <HeaderButton
+            {/* <HeaderButton
               variant="text"
               color="inherit"
               className={classes.button}
@@ -168,7 +166,7 @@ const Header = (props) => {
               href="/events"
             >
               Events
-            </HeaderButton>
+            </HeaderButton> */}
             <IconButton
               edge="start"
               aria-label="Help"
@@ -178,23 +176,6 @@ const Header = (props) => {
             >
               <HelpIcon />
             </IconButton>
-            {/* TODO */}
-            {/* <IconButton
-              edge="end"
-              aria-label="change language"
-              aria-haspopup="true"
-              color="inherit"
-            >
-              <LanguageIcon color="secondary" />
-            </IconButton> */}
-            {/* <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-haspopup="true"
-              color="inherit"
-            >
-              <AccountCircle color="secondary" />
-            </IconButton> */}
           </div>
           <div className={classes.sectionMobile}>
             <IconButton
@@ -215,6 +196,7 @@ const Header = (props) => {
               anchor="right"
               open={mobileOpen}
               onClose={handleDrawerToggle}
+              onClick={handleDrawerToggle}
               ModalProps={{
                 keepMounted: true, // Better open performance on mobile.
               }}

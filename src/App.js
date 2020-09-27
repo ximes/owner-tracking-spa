@@ -81,6 +81,8 @@ function App() {
                   />
                 </Route>
                 <Route exact path="/help" component={Help} />
+                {/* <Route exact path="/events">Events (TODO)</Route>
+                <Route exact path="/accounts">Account (TODO)</Route> */}
                 <Route path="/">
                   <Home
                     showHeaderTitleCallback={handleShowHeaderTitle}
