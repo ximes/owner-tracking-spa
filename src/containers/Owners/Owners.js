@@ -1,10 +1,8 @@
 import React from 'react';
-
-import { Container, Grid, Link, Typography } from '@material-ui/core';
 import { withStyles } from "@material-ui/core/styles";
-
+import { Container, Grid, Typography } from "@material-ui/core";
 import OwnersMap from "../OwnersMap/OwnersMap";
-
+import ShortStats from "../Stats/ShortStats";
 import { FirebaseContext } from "../../components/Firebase";
 
 const useStyles = (theme) => ({
@@ -80,11 +78,18 @@ class Owners extends React.Component {
 
         <Container className={classes.cardGrid}>
           <Grid container spacing={4}>
-            <Typography variant="h2" component="h2">
-              Statistics
-            </Typography>
+            <Grid item>
+              <Typography variant="h2" component="h2">
+                Statistics
+              </Typography>
+            </Grid>
           </Grid>
         </Container>
+
+        <FirebaseContext.Consumer>
+          {(firebase) => <ShortStats firebase={firebase} />}
+        </FirebaseContext.Consumer>
+        <div className={classes.spacer} />
       </div>
     );
   }
