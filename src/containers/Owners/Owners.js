@@ -61,7 +61,19 @@ class Owners extends React.Component {
     return (
       <div className={classes.root}>
         <FirebaseContext.Consumer>
-          {(firebase) => <OwnersMap detailed={true} firebase={firebase} />}
+          {(firebase) => (
+            <OwnersMap
+              detailed={true}
+              firebase={firebase}
+              registrationFormOpen={this.props.registrationFormOpen}
+              handleRegistrationDrawerOpen={
+                this.props.handleRegistrationDrawerOpen
+              }
+              handleRegistrationDrawerClose={
+                this.props.handleRegistrationDrawerClose
+              }
+            />
+          )}
         </FirebaseContext.Consumer>
 
         <div className={classes.spacer} />

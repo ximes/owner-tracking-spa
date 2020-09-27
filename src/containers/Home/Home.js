@@ -67,28 +67,32 @@ class Home extends React.Component {
       <div className={classes.root}>
         <Hero
           showHeaderTitleCallback={this.props.showHeaderTitleCallback}
-          openRegistrationModal={this.props.openRegistrationModalCallback}
+          registrationFormOpen={this.props.registrationFormOpen}
+          handleRegistrationDrawerOpen={this.props.handleRegistrationDrawerOpen}
+          handleRegistrationDrawerClose={
+            this.props.handleRegistrationDrawerClose
+          }
         />
         <FirebaseContext.Consumer>
-          {(firebase) => <OwnersMap firebase={firebase} />}
+          {(firebase) => (
+            <React.Fragment>
+              <OwnersMap
+                firebase={firebase}
+                detailed
+                registrationFormOpen={this.props.registrationFormOpen}
+                handleRegistrationDrawerOpen={
+                  this.props.handleRegistrationDrawerOpen
+                }
+                handleRegistrationDrawerClose={
+                  this.props.handleRegistrationDrawerClose
+                }
+              />
+              <div className={classes.spacer} />
+              <ShortStats firebase={firebase} />
+              <div className={classes.spacer} />
+            </React.Fragment>
+          )}
         </FirebaseContext.Consumer>
-
-        <div className={classes.spacer} />
-        <Container className={classes.cardGrid}>
-          <Grid container spacing={4}>
-            <GridCard title="How old are our mcs?">
-              <DummyChart fill1="#8884d8" fill2="red" />
-            </GridCard>
-            <GridCard title="How long did we travel?">
-              Well meaning and kindly.
-            </GridCard>
-            <GridCard title="How many are we?">
-              <DummyChart fill1="blue" fill2="black" />
-            </GridCard>
-            <GridCard title="Where are we located?" />
-          </Grid>
-        </Container>
-        <div className={classes.spacer} />
       </div>
     );
   }

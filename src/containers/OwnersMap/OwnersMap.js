@@ -98,7 +98,11 @@ class OwnersMap extends React.Component {
           </Zoom>
         </div>
         <div className={classes.mapLayer}>
-          <OwnersMapActions />
+          <OwnersMapActions
+            registrationFormOpen={this.props.registrationFormOpen}
+            handleRegistrationDrawerOpen={this.props.handleRegistrationDrawerOpen}
+            handleRegistrationDrawerClose={this.props.handleRegistrationDrawerClose}
+          />
         </div>
       </div>
     );
