@@ -92,10 +92,9 @@ const RegistrationForm = (props) => {
   }
 
   const handleChange = (event) => {
-    setFormValues((prevValues) => ({
-      ...prevValues,
-      [event.target.name]: event.target.value,
-    }));
+    let prevValues = formValues;
+    prevValues[event.target.name] = event.target.value;
+    setFormValues(prevValues);
   };
 
   const handleSliderChange = (event, value) => {
@@ -184,6 +183,7 @@ const RegistrationForm = (props) => {
                   id: "model",
                 }}
               >
+                <MenuItem value="">-</MenuItem>
                 {modelOptions}
               </Select>
             </FormControl>
@@ -275,18 +275,21 @@ const RegistrationForm = (props) => {
           </Grid>
         </FormControl>
 
-        <TextField
-          label="Registration"
-          value={formValues.registration}
-          placeholder="(optional)"
-          inputProps={{
-            name: "registration",
-            id: "registration",
-          }}
-          onChange={handleChange}
-          helperText="This value won't be shown to public (optional)"
-          fullWidth={true}
-        />
+        <FormControl className={classes.formControl} fullWidth={true}>
+          <TextField
+            label="Registration"
+            value={formValues.registration}
+            placeholder="(optional)"
+            inputProps={{
+              name: "registration",
+              id: "registration",
+            }}
+            name="registation"
+            onChange={handleChange}
+            helperText="This value won't be shown to public (optional)"
+            fullWidth={true}
+          />
+        </FormControl>
 
         <FormControl
           className={clsx(classes.formControl, classes.formSubmit)}
