@@ -21,7 +21,7 @@ const Footer = () => {
           <Link color="inherit" href="https://caponordregistry.com/">
             ©{" "}{new Date().getFullYear()}</Link>
           {" - "}
-          <Link color="inherit" to="/help#privacy">
+          <Link color="inherit" href="/help#privacy">
             Privacy
           </Link>
           {" - "}

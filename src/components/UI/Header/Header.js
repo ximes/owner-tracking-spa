@@ -174,6 +174,7 @@ const Header = (props) => {
               aria-label="Help"
               aria-haspopup="true"
               color="inherit"
+              href="/help"
             >
               <HelpIcon />
             </IconButton>
