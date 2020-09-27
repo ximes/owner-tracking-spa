@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { Map, TileLayer } from "react-leaflet";
 import { makeStyles } from "@material-ui/core/styles";
-import Loader from "../UI/Loader/Loader";
+import FullpageLoader from "../UI/Loader/FullpageLoader";
 import OwnerMarker from "./Markers/OwnerMarker";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 require("react-leaflet-markercluster/dist/styles.min.css"); 
@@ -54,7 +54,7 @@ const LeafletMap = (props) => {
     </Map>
   );
 
-  return props.items ? mapLayer : <Loader />;
+  return props.items ? mapLayer : <FullpageLoader />;
 }
 
 export default LeafletMap;

@@ -7,7 +7,7 @@ import {
 } from "@material-ui/core/styles";
 import { blueGrey, red} from "@material-ui/core/colors";
 import { CssBaseline } from "@material-ui/core";
-import { Footer, Header, Loader } from './components/UI';
+import { Footer, Header, FullpageLoader } from './components/UI';
 
 const Home = lazy(() => import("./containers/Home/Home"));
 const Owners = lazy(() => import("./containers/Owners/Owners"));
