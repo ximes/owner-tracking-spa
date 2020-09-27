@@ -25,12 +25,13 @@ const GridCard = (props) => {
     const icon = props.icon ? props.icon : <BarChartRoundedIcon fontSize="large" />;
 
     return (
-      <Grid item xs={12} sm={3}>
+      <Grid item sm={12} md={3}>
         <Card className={classes.card}>
           <CardHeader
-            avatar={ icon }
+            avatar={icon}
             title={props.title}
             subheader={props.subheader}
+            titleTypographyProps={{variant: 'h6'}}
           />
           <CardContent className={classes.cardContent}>
             {props.children}
