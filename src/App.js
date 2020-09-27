@@ -1,4 +1,4 @@
-import React, { Suspense, useState, lazy } from "react";
+import React, { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import {
   createMuiTheme,
@@ -11,6 +11,7 @@ import { Footer, Header, FullpageLoader } from './components/UI';
 
 const Home = lazy(() => import("./containers/Home/Home"));
 const Owners = lazy(() => import("./containers/Owners/Owners"));
+const Help = lazy(() => import("./containers/Help/Help"));
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -79,6 +80,7 @@ function App() {
                     }
                   />
                 </Route>
+                <Route exact path="/help" component={Help} />
                 <Route path="/">
                   <Home
                     showHeaderTitleCallback={handleShowHeaderTitle}
