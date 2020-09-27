@@ -68,7 +68,7 @@ function App() {
           <Header showTitle={showHeaderTitle} />
           <main className={classes.content}>
             <div className={classes.toolbar} />
-            <Suspense fallback={<Loader />}>
+            <Suspense fallback={<FullpageLoader />}>
               <Switch>
                 <Route exact path="/owners">
                   <Owners
