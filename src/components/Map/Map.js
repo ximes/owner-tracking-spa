@@ -20,7 +20,7 @@ const LeafletMap = (props) => {
 
   const centerLat = 45.55048;
   const centerLng = 12.0722;
-  const defaultZoom = 2;
+  const defaultZoom = 4;
 
   const ownerMarkerList = () => {  
     const items = props.items.map(({ key, ...itemDetails }, index) => (
