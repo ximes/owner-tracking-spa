@@ -55,14 +55,14 @@ const OwnerMarker = (props) => {
 
   let modelInitials = "";
   switch (props.content.model) {
-    case "Rally":
-      modelInitials = "RL";
-      break;
-    case "TP":
+    case "tp":
       modelInitials = "TP";
       break;
-    case "Raid":
+    case "raid":
       modelInitials = "RD";
+      break;
+    case "rally":
+      modelInitials = "RL";
       break;
     default:
       modelInitials = "-";
@@ -74,7 +74,7 @@ const OwnerMarker = (props) => {
     case "raid":
       colorClass = "raid";
       break;
-    case "army green":
+    case "green":
       colorClass = "army";
       break;
     case "orange":
@@ -121,6 +121,65 @@ const OwnerMarker = (props) => {
     <ListItemText primary={`${content.mileage} km`} />
   </ListItem> : null;
 
+  const modelLabelFor = (model) => {
+    let label = "";
+
+    switch (model) {
+      case "1200":
+        label = "Caponord 1200 Base";
+        break;
+      case "tp":
+        label = "Caponord 1200 Travel Pack";
+        break;
+      case "raid":
+        label = "ETV 1000 Raid";
+        break;
+      case "rally":
+        label = "Caponord 1200 Rally";
+        break;
+      default:
+        label = "ETV 1000";
+    }
+
+    return label;
+  };
+  
+  const colorLabelFor = (color) => {
+    let colorLabel = "";
+
+    switch (color) {
+      case "raid":
+        colorLabel = "Raid Pattern";
+        break;
+      case "green":
+        colorLabel = "Army Green";
+        break;
+      case "orange":
+        colorLabel = "Orange";
+        break;
+      case "red":
+        colorLabel = "Red";
+        break;
+      case "golden":
+        colorLabel = "Golden";
+        break;
+      case "black":
+        colorLabel = "Black";
+        break;
+      case "grey":
+        colorLabel = "Ggrey";
+        break;
+      case "white":
+        colorLabel = "White";
+        break;
+      default:
+        colorLabel = "-";
+      }
+
+    return colorLabel;
+  };
+
+
   let details = (
     <Popup>
       <List component="ul">
@@ -130,7 +189,7 @@ const OwnerMarker = (props) => {
               {modelInitials}
             </Avatar>
           </ListItemAvatar>
-          <ListItemText primary="Color" />
+          <ListItemText primary={colorLabelFor(colorClass)} />
         </ListItem>
         <ListItem>
           <ListItemAvatar>
@@ -139,7 +198,7 @@ const OwnerMarker = (props) => {
             </Avatar>
           </ListItemAvatar>
           <ListItemText>
-            {content.model} <Chip size="small" label={content.year} />
+            {modelLabelFor(content.model)} <Chip size="small" label={content.year} />
           </ListItemText>
         </ListItem>
         {mileage}
