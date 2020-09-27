@@ -75,7 +75,7 @@ const OwnerMarker = (props) => {
       colorClass = "raid";
       break;
     case "green":
-      colorClass = "army";
+      colorClass = "green";
       break;
     case "orange":
       colorClass = "orange";
