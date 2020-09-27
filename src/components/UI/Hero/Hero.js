@@ -36,7 +36,7 @@ const Hero = (props) => {
   
   useEffect(() => { 
     setHeroHeight(heroRef.current.clientHeight); 
-  });
+  }, []);
   
   useScrollPosition(
     ({ _, currPos }) => {
@@ -60,9 +60,12 @@ const Hero = (props) => {
             paragraph
             styles={{ color: "white" }}
           >
-            Something short and leading about the collection below—its contents,
-            the creator, etc. Make it short and sweet, but not too short so
-            folks don&apos;t simply skip over it entirely.
+            A list of owners of this lovely motorcycle around the world.
+          </Typography>
+          <Typography paragraph align="center" styles={{ color: "white" }}>
+            <strong>Are you a Caponord owner?</strong> You can contribute by
+            registering yours to the list clicking of the button below. <br />
+            Or just browse the map to see how many Caponords live nearby!
           </Typography>
           <div className={classes.featuredActions}>
             <Grid container spacing={2} justify="center">
@@ -72,6 +75,7 @@ const Hero = (props) => {
                   color="primary"
                   startIcon={<AddIcon />}
                   size="large"
+                  onClick={props.handleRegistrationDrawerOpen}
                 >
                   Register yours
                 </Button>
@@ -84,7 +88,7 @@ const Hero = (props) => {
                   size="large"
                   startIcon={<ScoreIcon />}
                 >
-                  Detailed stats
+                  See detailed stats
                 </Button>
               </Grid>
             </Grid>
