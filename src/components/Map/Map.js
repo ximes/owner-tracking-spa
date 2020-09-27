@@ -39,7 +39,7 @@ const LeafletMap = (props) => {
       zoom={defaultZoom}
       className={classes.map}
       minZoom={1}
-      maxZoom={8}
+      maxZoom={12}
       style={{
         height: props.detailed ? "450px" : `${window.innerHeight / 3}px`,
       }}
