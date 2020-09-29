@@ -49,7 +49,6 @@ const RegistrationForm = (props) => {
     locationCountryCode: undefined,
     model: undefined,
     year: undefined,
-    registration: null,
     color: undefined,
     mileage: 1000,
   });
@@ -273,22 +272,6 @@ const RegistrationForm = (props) => {
             </Grid>
             <Grid item></Grid>
           </Grid>
-        </FormControl>
-
-        <FormControl className={classes.formControl} fullWidth={true}>
-          <TextField
-            label="Registration"
-            value={formValues.registration}
-            placeholder="(optional)"
-            inputProps={{
-              name: "registration",
-              id: "registration",
-            }}
-            name="registation"
-            onChange={handleChange}
-            helperText="This value won't be shown to public (optional)"
-            fullWidth={true}
-          />
         </FormControl>
 
         <FormControl
