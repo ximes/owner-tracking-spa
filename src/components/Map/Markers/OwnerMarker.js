@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     "&.white, &.white .avatar": { backgroundColor: "#ffffff", color: "#000000" },
     "&.orange, &.orange .avatar": { backgroundColor: "#fcba03" },
     "&.black, &.black .avatar": { backgroundColor: "#000000" },
-    "&.army, &.army .avatar": { backgroundColor: "#2f4f28" },
+    "&.green, &.green .avatar": { backgroundColor: "#2f4f28" },
     "&.raid, &.raid .avatar": { backgroundColor: "#e3ab98", color: "#000000" },
     "&.grey, &.grey .avatar": { backgroundColor: "#cccccc"},
   },
@@ -69,7 +69,6 @@ const OwnerMarker = (props) => {
   }
 
   let colorClass = "white";
-
   switch (props.content.color) {
     case "raid":
       colorClass = "raid";

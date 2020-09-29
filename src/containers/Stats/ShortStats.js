@@ -62,7 +62,7 @@ class ShortStats extends React.Component {
     const { classes, theme } = this.props;
 
     const Chart = (props) => {
-      const labels = props.labels ? props.labels : Object.keys(props.data);
+      const labels = props.labels ? props.labels.filter(({ key, _ }) => (Object.keys(props.data).includes(key))).map(({ _, value }) => (value)) : Object.keys(props.data);
       const entries = Object.keys(props.data).map((mc) => props.data[mc]);
       const colors = [...Array(entries.length)].map(
         (_, i) =>
@@ -121,7 +121,12 @@ class ShortStats extends React.Component {
           </GridCard>
           <GridCard title="Road behind our backs">
             <Chart
-              labels={["< 1000 km", "1k-25k km", "25k-50k km", ">100k km"]}
+              labels={[
+                { key: "1000", value: "< 1000 km" },
+                { key: "25000", value: "1k-25k km" },
+                { key: "50000", value: "25k-50k km" },
+                { key: "100000", value: ">100k km"}
+              ]}
               data={this.state.mcsByMileage}
             />
           </GridCard>
@@ -133,11 +138,11 @@ class ShortStats extends React.Component {
           <GridCard title="Caponord Models">
             <Chart
               labels={[
-                "1000 Base",
-                "1000 Raid",
-                "1200 Base",
-                "1200 TP",
-                "1200 Rally",
+                { key: "base", value: "1000 Base" },
+                { key: "raid", value: "1000 Raid" },
+                { key: "1200", value: "1200 Base" },
+                { key: "tp", value: "1200 TP" },
+                { key: "rally", value: "1200 Rally" },
               ]}
               data={this.state.mcsByModel}
             />
