@@ -60,12 +60,11 @@ const Hero = (props) => {
             paragraph
             styles={{ color: "white" }}
           >
-            A list of owners of this lovely motorcycle around the world.
+            A list of owners of this amazing motorcycle around the world.
           </Typography>
           <Typography paragraph align="center" styles={{ color: "white" }}>
-            <strong>Are you a Caponord owner?</strong> You can contribute by
-            registering yours to the list clicking of the button below. <br />
-            Or just browse the map to see how many Caponords live nearby!
+            <strong>Are you a Caponord owner?</strong> You can register yours to the list by clicking of the button below. <br />
+            Or just browse the map to see how many Caponord live nearby!
           </Typography>
           <div className={classes.featuredActions}>
             <Grid container spacing={2} justify="center">

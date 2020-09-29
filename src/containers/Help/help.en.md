@@ -1,30 +1,63 @@
-<a name="about"></a>
-# About
-## Contact me
->> Link
+<a  name="about"></a>
+## What's this?
+Aprilia Caponord owners are a fun bunch of people very happy with their motorcycles, from all over the world.
+This **Aprilia Caponord Registry** is mainly meant as a quick programming exercise. 
+It doesn't claim to be anything but an unofficial, voluntary registry of ownership, which would make easy to tell how many of us there are and where we are located, how old are our bike and how long we traveled.
+I'm not associated with Aprilia or any local group.
 
-## Spotted an error?
-Let me know: >> Link
+<a  name="contactme"></a>
+## Spotted an error? / Contact me
+- Do you see anything wrong with the website?
+- It doesn't look good on your phone/computer?
 
-<a name="faq"></a>
-# FAQ
-## How is my data stored?
-Turducken beef ribs pork belly kevin flank. Hamburger capicola tenderloin, bresaola fatback venison ribeye filet mignon landjaeger. Pork belly meatball chislic, boudin ham capicola cupim. Jerky meatball short ribs, fatback buffalo spare ribs shank pork belly flank salami. Boudin ball tip jowl, hamburger frankfurter chuck swine.
+Open an issue or drop me a message at:
+[Github](https://github.com/ximes/owner-tracking-spa) / [Facebook](https://www.facebook.com/stefanofranzin/)
 
-## Some other thing
-Short ribs bacon pork loin chicken. Brisket sausage fatback landjaeger. Cow meatloaf prosciutto, landjaeger shankle ham andouille burgdoggen pork t-bone pork loin spare ribs frankfurter. Ball tip jerky pastrami venison bacon.
+## What data is stored and how?
+See [Privacy & Data](#privacy) 
+  
+## How can I delete / rectify my data?
+Sorry, you can't do that on your own right now. I will possibly improve the website in the future, but for the time being, just [drop me a line](#contactme) and we'll sort it out. 
 
-## Any question?
-Let me know: >> Link
+## I'd like to add this feature / Can I help?
+Sure! [Contact me!](#contactme)
 
-<a name="privacy"></a>
-# Privacy & Data Use
-Shank pig buffalo, cupim salami filet mignon swine andouille chislic venison ham hock pancetta leberkas beef ribs. Tail venison salami andouille rump fatback sirloin tri-tip chicken kielbasa picanha swine. Pork belly tongue cow, ground round beef ribs ham hock jowl. Leberkas beef ribs shoulder biltong, chuck t-bone sausage ground round fatback kevin frankfurter. Picanha venison ham ground round pancetta meatball flank alcatra.
+## Any other question?
+Just [drop me a line](#contactme)
+ 
+<a  name="privacy"></a>
 
-<a name="cookies"></a>
-# Cookies
-Shank pig buffalo, cupim salami filet mignon swine andouille chislic venison ham hock pancetta leberkas beef ribs. Tail venison salami andouille rump fatback sirloin tri-tip chicken kielbasa picanha swine. Pork belly tongue cow, ground round beef ribs ham hock jowl. Leberkas beef ribs shoulder biltong, chuck t-bone sausage ground round fatback kevin frankfurter. Picanha venison ham ground round pancetta meatball flank alcatra.
 
-<a name="credits"></a>
-# Credits
-Bacon ipsum dolor amet salami strip steak buffalo, burgdoggen jerky beef ribs landjaeger short loin alcatra shoulder leberkas short ribs t-bone. Turkey venison meatball beef buffalo beef ribs flank. Salami pork leberkas, kevin brisket rump cow hamburger sausage tri-tip pork chop. Strip steak chuck chislic bresaola biltong turducken beef ribs corned beef salami. Bresaola sirloin meatloaf pancetta buffalo chuck. Drumstick chuck pancetta meatball kevin prosciutto t-bone picanha shankle beef. Ham hock t-bone ribeye prosciutto salami.
+<br>
+
+
+# Privacy & Data
+
+Data is stored in a Google Firestore's database. 
+
+The following data is stored upon registration:
+- color, year, and model of your Caponord
+- overall mileage (it just gives a rough idea of bike's longevity)
+- estimated location
+
+Location selected is always approximated to city/town level, as it's intended to give an overall idea of how Caponord are distributed. 
+It doesn't give up the position where the bike is stored, nor it tracks the position of the device you're using. What you select as location is totally up to you!
+
+None of the collected information is identified as personal data so there's nothing you should worry about. Collected data is stored for statistical/visualisation purposes only.
+
+<br>
+
+
+<a  name="credits"></a>
+
+# Credits / Resources 
+
+Some useful resources/groups:
+- [Main Aprilia forum](https://www.apriliaforum.com)
+- [Request Aprilia manuals](http://manuals.aprilia.com/)
+- [I signori della Caponord](https://www.facebook.com/groups/394413534405233)
+- [Aprilia Caponord 1200 Owners](https://www.facebook.com/groups/27247493648/)
+- [Aprilia Caponord 1200 Lovers!](https://www.facebook.com/groups/1551350621769529/)
+
+
+<br><br>

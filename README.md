@@ -1,5 +1,15 @@
-# Owner Tracking SPA
-App to track MC ownership over a map
+# Aprilia Caponord Registry
+Aprilia Caponord owners are a fun bunch of people very happy with their motorcycles, from all over the world.
+This **Aprilia Caponord Registry** is mainly meant as a quick programming exercise. 
+It doesn't claim to be anything but an unofficial, voluntary registry of ownership, which would make easy to tell how many of us there are and where we are located, how old are our bike and how long we traveled.
+I'm not associated with Aprilia or any local group.
+
+## Spotted an error? / Contact me
+- Do you see anything wrong with the website?
+- It doesn't look good on your phone/computer?
+
+Open an issue or drop me a message at:
+[Github](https://github.com/ximes/owner-tracking-spa) / [Facebook](https://www.facebook.com/stefanofranzin/)
 
 ## Available Scripts
 
