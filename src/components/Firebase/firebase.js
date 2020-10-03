@@ -11,8 +11,15 @@ const config = {
 };
 
 class Firebase {
-  constructor() { 
+  constructor() {
     app.initializeApp(config);
+
+    if (window.location.hostname === "localhost") {
+      app.firestore().settings({
+        host: "localhost:8091",
+        ssl: false,
+      });
+    }
     this.db = app.firestore();
   }
 

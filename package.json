@@ -25,7 +25,7 @@
     "react-scripts": "3.4.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "firebase emulators:start & react-scripts start",
     "build": "react-scripts build && echo '/* /index.html 200' > ./build/_redirects",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
