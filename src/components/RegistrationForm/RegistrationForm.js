@@ -8,9 +8,9 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  Slider,
-  TextField
+  Slider
 } from "@material-ui/core";
+
 import SaveIcon from "@material-ui/icons/Save";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
@@ -175,6 +175,7 @@ const RegistrationForm = (props) => {
                 placeholder="Model"
                 label="Model"
                 fullWidth={true}
+                value={formValues.model}
                 error={false}
                 onChange={handleChange}
                 inputProps={{
@@ -252,7 +253,7 @@ const RegistrationForm = (props) => {
             name="locationLongitude"
             value={formValues.locationLongitude}
           />
-          <LocationSearch onChange={handleLocationChange} required />
+          <LocationSearch onChange={handleLocationChange} required value={formValues.locationName} />
         </FormControl>
 
         <FormControl className={classes.formControl} fullWidth={true}>

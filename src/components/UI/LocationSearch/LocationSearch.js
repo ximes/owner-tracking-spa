@@ -37,8 +37,10 @@ function LocationSearch(props) {
         fields={["address_components", "geometry.location", "name"]}
       >
         <TextField
+          required
           helperText="This is going to be displayed on a map. Stick it to city-level"
           fullWidth={true}
+          value={props.value}
           error={false}
         />
       </Autocomplete>
