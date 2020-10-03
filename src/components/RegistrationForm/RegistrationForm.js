@@ -59,7 +59,6 @@ const RegistrationForm = (props) => {
     let { locationLatitude, locationLongitude, ...mcData } = { ...formValues };
 
     const data = {
-      uid: new Date().getTime(),
       ...mcData,
       location: new firebase.firestore.GeoPoint(
         formValues.locationLatitude,
@@ -69,14 +68,23 @@ const RegistrationForm = (props) => {
 
     props.firebase
       .motorcycles()
-      .doc(data.uid.toString())
-      .set(data)
-      .then(() => {
-        console.log("debug: A new MC has been added", "Success");
+      .add(data)
+      .then((docRef) => {
+        console.log(`debug: A new MC has been added`, "Success");
+        props.handleFeedback({
+          type: "success",
+          message: `Thanks! You registered your motorcycle. Your ref. number: ${docRef.id}.`,
+          open: true,
+        });
         props.afterSubmit();
       })
       .catch((error) => {
         console.log(error.message, "debug: Create MC failed");
+        props.handleFeedback({
+          type: "error",
+          message: 'Something went wrong',
+          open: true,
+        });
       });
   };
 

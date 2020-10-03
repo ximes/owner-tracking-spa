@@ -197,11 +197,13 @@ const OwnerMarker = (props) => {
             </Avatar>
           </ListItemAvatar>
           <ListItemText>
-            {modelLabelFor(content.model)} <Chip size="small" label={content.year} />
+            {modelLabelFor(content.model)}{" "}
+            <Chip size="small" label={content.year} />
           </ListItemText>
         </ListItem>
         {mileage}
       </List>
+      {content.uid}
     </Popup>
   );
 
