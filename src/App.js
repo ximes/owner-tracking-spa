@@ -8,6 +8,7 @@ import {
 import { blueGrey, red} from "@material-ui/core/colors";
 import { CssBaseline } from "@material-ui/core";
 import { Footer, Header, FullpageLoader } from './components/UI';
+import FeedbackMessage from "./components/UI/FeedbackMessage/FeedbackMessage";
 
 const Home = lazy(() => import("./containers/Home/Home"));
 const Owners = lazy(() => import("./containers/Owners/Owners"));
@@ -49,17 +50,38 @@ function App() {
   const [showHeaderTitle, setShowHeaderTitle] = React.useState(false);
   const [registrationFormOpen, setRegistrationFormOpen] = React.useState(false);
 
+  const [feedback, setFeedback] = React.useState({
+    message: undefined,
+    open: false,
+    type: undefined,
+  });
+
   const handleShowHeaderTitle = (showTitle) => {
     setShowHeaderTitle(showTitle);
   };
 
-   const handleRegistrationDrawerOpen = () => {
-     setRegistrationFormOpen(true);
-   };
+  const handleFeedback = (message) => {
+    console.log('ads')
+    if (message) {
+      setFeedback(message);
+    }
+  };
 
-   const handleRegistrationDrawerClose = () => {
-     setRegistrationFormOpen(false);
-   };
+  const handleFeedbackClose = () => {
+    setFeedback({
+      open: false
+    });
+  };
+  const handleRegistrationDrawerOpen = () => {
+    setRegistrationFormOpen(true);
+  };
+
+  const handleRegistrationDrawerClose = (message) => {
+    setRegistrationFormOpen(false);
+    if (message) {
+      setFeedback(message);
+    }
+  };
 
   return (
     <div className={classes.root}>
@@ -74,6 +96,7 @@ function App() {
                 <Route exact path="/owners">
                   <Owners
                     registrationFormOpen={registrationFormOpen}
+                    handleFeedback={handleFeedback}
                     handleRegistrationDrawerOpen={handleRegistrationDrawerOpen}
                     handleRegistrationDrawerClose={
                       handleRegistrationDrawerClose
@@ -86,6 +109,7 @@ function App() {
                 <Route path="/">
                   <Home
                     showHeaderTitleCallback={handleShowHeaderTitle}
+                    handleFeedback={handleFeedback}
                     registrationFormOpen={registrationFormOpen}
                     handleRegistrationDrawerOpen={handleRegistrationDrawerOpen}
                     handleRegistrationDrawerClose={
@@ -95,6 +119,10 @@ function App() {
                 </Route>
               </Switch>
             </Suspense>
+            <FeedbackMessage
+              {...feedback}
+              handleFeedbackClose={handleFeedbackClose}
+            />
           </main>
           <Footer />
         </Router>

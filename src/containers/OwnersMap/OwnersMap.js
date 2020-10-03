@@ -100,8 +100,13 @@ class OwnersMap extends React.Component {
         <div className={classes.mapLayer}>
           <OwnersMapActions
             registrationFormOpen={this.props.registrationFormOpen}
-            handleRegistrationDrawerOpen={this.props.handleRegistrationDrawerOpen}
-            handleRegistrationDrawerClose={this.props.handleRegistrationDrawerClose}
+            handleFeedback={this.props.handleFeedback}
+            handleRegistrationDrawerOpen={
+              this.props.handleRegistrationDrawerOpen
+            }
+            handleRegistrationDrawerClose={
+              this.props.handleRegistrationDrawerClose
+            }
           />
         </div>
       </div>

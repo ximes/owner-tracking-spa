@@ -62,7 +62,11 @@ const OwnersMapActions = (props) => {
   const formContents = (
     <FirebaseContext.Consumer>
       {(firebase) => (
-        <RegistrationForm firebase={firebase} afterSubmit={props.handleRegistrationDrawerClose} />
+        <RegistrationForm
+          firebase={firebase}
+          afterSubmit={props.handleRegistrationDrawerClose}
+          handleFeedback={props.handleFeedback}
+        />
       )}
     </FirebaseContext.Consumer>
   );

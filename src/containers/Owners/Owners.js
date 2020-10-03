@@ -63,6 +63,7 @@ class Owners extends React.Component {
             <OwnersMap
               detailed={true}
               firebase={firebase}
+              handleFeedback={this.props.handleFeedback}
               registrationFormOpen={this.props.registrationFormOpen}
               handleRegistrationDrawerOpen={
                 this.props.handleRegistrationDrawerOpen

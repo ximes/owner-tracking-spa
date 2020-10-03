@@ -32,6 +32,7 @@ class Home extends React.Component {
               <OwnersMap
                 firebase={firebase}
                 detailed
+                handleFeedback={this.props.handleFeedback}
                 registrationFormOpen={this.props.registrationFormOpen}
                 handleRegistrationDrawerOpen={
                   this.props.handleRegistrationDrawerOpen
