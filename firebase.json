@@ -5,16 +5,10 @@
     },
     "ui": {
       "enabled": true
-    },
-    "functions": {
-      "port": 5001
     }
   },
   "firestore": {
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
-  },
-  "storage": {
-    "rules": "storage.rules"
   }
 }
