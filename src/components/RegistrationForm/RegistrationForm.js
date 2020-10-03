@@ -59,6 +59,7 @@ const RegistrationForm = (props) => {
     let { locationLatitude, locationLongitude, ...mcData } = { ...formValues };
 
     const data = {
+      uid: props.firebase.motorcycles().doc().id,
       ...mcData,
       location: new firebase.firestore.GeoPoint(
         formValues.locationLatitude,
