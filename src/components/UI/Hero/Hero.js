@@ -63,7 +63,7 @@ const Hero = (props) => {
             A list of owners of this amazing motorcycle around the world.
           </Typography>
           <Typography paragraph align="center" styles={{ color: "white" }}>
-            <strong>Are you a Caponord owner?</strong> You can register yours to the list by clicking of the button below. <br />
+            <strong>Are you a Caponord owner?</strong> You can register yours to the list. <br />
             Or just browse the map to see how many Caponord live nearby!
           </Typography>
           <div className={classes.featuredActions}>
