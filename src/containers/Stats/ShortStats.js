@@ -4,7 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 
 import { Box, Container, Grid, Typography } from "@material-ui/core";
 import GridCard from "../../components/UI/Stats/GridCard";
-import { blue, green, orange } from "@material-ui/core/colors";
+import { blue } from "@material-ui/core/colors";
 import Loader from "../../components/UI/Loader/Loader";
 import { Pie } from "react-chartjs-2";
 import chroma from 'chroma-js';

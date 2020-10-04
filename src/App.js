@@ -61,7 +61,6 @@ function App() {
   };
 
   const handleFeedback = (message) => {
-    console.log('ads')
     if (message) {
       setFeedback(message);
     }
