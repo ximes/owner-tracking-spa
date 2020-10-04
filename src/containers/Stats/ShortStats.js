@@ -92,8 +92,7 @@ class ShortStats extends React.Component {
                 circumference: Math.PI,
                 rotation: -Math.PI,
                 cutoutPercentage: 20,
-                responsive: true,
-                aspectRation: 1,
+                responsive: false,
                 legend: {
                   align: "start",
                   labels: {
@@ -125,7 +124,10 @@ class ShortStats extends React.Component {
                 { key: "1000", value: "< 1000 km" },
                 { key: "25000", value: "1k-25k km" },
                 { key: "50000", value: "25k-50k km" },
-                { key: "100000", value: ">100k km"}
+                { key: "75000", value: "50-75k km"},
+                { key: "100000", value: "75-100k km"},
+                { key: "125000", value: "100-125k km"},
+                { key: "150000", value: ">150k km"}
               ]}
               data={this.state.mcsByMileage}
             />
@@ -138,7 +140,7 @@ class ShortStats extends React.Component {
           <GridCard title="Caponord Models">
             <Chart
               labels={[
-                { key: "base", value: "1000 Base" },
+                { key: "etv", value: "1000 Base" },
                 { key: "raid", value: "1000 Raid" },
                 { key: "1200", value: "1200 Base" },
                 { key: "tp", value: "1200 TP" },
